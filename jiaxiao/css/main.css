@@ -28,3 +28,10 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 .font_green{
 	color: #09bb07;
 }
+.align_right{
+	text-align: right;
+}
+
+.align_center{
+	text-align: center;
+}

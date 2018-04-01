@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<title>预报名</title>
+	<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css">
+	<link rel="stylesheet" href="https://cdn.bootcss.com/jquery-weui/1.2.0/css/jquery-weui.min.css">
+	<style type="text/css">
+		body,html{height:100%;-webkit-tap-highlight-color:transparent}
+		body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
+		.container, .page {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+		.container {
+			overflow: hidden;
+		}
+		.page, body {
+			background-color: #f8f8f8;
+		}
+		.globl_bg_color{
+			background-color: #f8f8f8 !important;
+		}
+		.height100{
+			height: 100%;
+		}
+		.weui-cell__bd .weui-badge{
+			margin-left: 0.3rem;
+		}
+		.mr-left1_2{
+			margin-left: 1.2rem;
+		}
+		.sub_content{
+			font-size: 15px;
+			color: #777;
+		}
+		.cell_swipe_btn{
+			line-height: 68px;
+		}
+		.cursor_pointer{
+			cursor: pointer;
+		}
+		.font_green{
+			color: #09bb07;
+		}
+	</style>
+</head>
+<body ontouchstart>
+	<div class="page" id="container">
+		<div class="weui-search-bar" id="searchBar">
+            <form class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                    <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+                </div>
+                <label class="weui-search-bar__label" id="searchText">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </form>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+        </div>
+
+         <div class="weui-cells searchbar-result" id="searchResult">
+           
+        </div>
+	</div>
+	<script src="https://cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/jquery-weui.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/swiper.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery-weui/1.2.0/js/city-picker.min.js"></script>
+	<script src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.js"></script>
+	<script src="https://cdn.bootcss.com/mootools/1.6.0/mootools-core.min.js"></script>
+	<script src="../js/template.js"></script>
+	<script src="../js/pinyin.js"></script>
+	<script id="searchItems" type="text/html">
+		<%for (var i = 0; i < data.length; i++){%>
+			<div class="weui-cell weui-cell_access cursor_pointer searchItem" data-info="<%=data[i].name%> <%=data[i].mobile%>">
+	            <div class="weui-cell__bd weui-cell_primary">
+	                <span><%:=data[i].searchName%>&nbsp;&nbsp;<%:=data[i].searchMobile%></span>
+	            </div>
+        	</div>
+		<%}%>
+	</script>
+
+	<script id="noItems" type="text/html">
+		<div class="weui-loadmore weui-loadmore_line">
+            <span class="weui-loadmore__tips">暂无数据</span>
+        </div>
+	</script>
+
+	<script type="text/javascript">
+		$(function(){
+        var $searchBar = $('#searchBar'),
+            $searchResult = $('#searchResult'),
+            $searchText = $('#searchText'),
+            $searchInput = $('#searchInput'),
+            $searchClear = $('#searchClear'),
+            $searchCancel = $('#searchCancel');
+
+        function hideSearchResult(){
+            $searchResult.hide();
+            $searchInput.val('');
+        }
+        function cancelSearch(){
+            hideSearchResult();
+            $searchBar.removeClass('weui-search-bar_focusing');
+            $searchText.show();
+        }
+
+        function search(text, userInfos, max){
+        	var serachRes = [];
+        	for (var i = 0; i < userInfos.length; i++) {
+        		var matchRes = match(text, userInfos[i]);
+        		matchRes && serachRes.push(matchRes) ;
+        		if(serachRes.length >= max){
+        			break;
+        		}
+        	}
+        	return serachRes;
+        }
+
+        function match(text, user){
+        	var res;
+        	if(user.mobile.indexOf(text) != -1){
+        		res = res || {};
+    			res.searchMobile = user.mobile.replace(new RegExp('(' + text + ')', 'gi'), '<span class="font_green">$1</span>');
+    			res.mobile = user.mobile;
+    		}
+
+    		if(user.name.indexOf(text) != -1){
+    			res = res || {};
+    			res.searchName = user.name.replace(new RegExp('(' + text + ')', 'gi'), '<span class="font_green">$1</span>');
+    			res.name = user.name;
+    		}
+
+    		var pinyins = user.pinyin.split(/\s+/);
+    		for (var i = 0; i < pinyins.length; i++) {
+    			if (pinyins[i].indexOf(text) != -1) {
+    				res = res || {};
+    				res.searchName = user.name.replace(new RegExp('(' + user.name.charAt(i) + ')', 'gi'), '<span class="font_green">$1</span>');
+    				res.name = user.name;
+    			}
+    		}
+
+    		if(res){
+    			if(!res.mobile){
+					res.mobile = user.mobile;
+					res.searchMobile = user.mobile;
+    			}
+    			if(!res.name){
+					res.name = user.name;
+					res.searchName = user.name;
+    			}
+    		}
+    		return res;
+        }
+
+        $searchText.on('click', function(){
+            $searchBar.addClass('weui-search-bar_focusing');
+            $searchInput.focus();
+        });
+        $searchInput
+            .on('blur', function () {
+                if(!this.value.length) cancelSearch();
+            })
+            .on('input', function(){
+                if(this.value.length) {
+                	var searchUsers = search(this.value, userInfos, 10);
+                	var tpl = searchUsers.length > 0 ? "searchItems" : "noItems";
+                	$("#searchResult").html(template(document.getElementById(tpl).innerHTML, {"data":searchUsers}));
+                    $searchResult.show();
+                } else {
+                    $searchResult.hide();
+                }
+            });
+        $searchClear.on('click', function(){
+            hideSearchResult();
+            $searchInput.focus();
+        });
+        $searchCancel.on('click', function(){
+            cancelSearch();
+            $searchInput.blur();
+        });
+
+        $("body").on("click", ".searchItem", function(){
+        	$searchInput.val($(this).data("info"));
+        })
+        var userInfos = [];
+        $.getJSON("../json/user.json").done(function(res){
+        	userInfos = res;
+		});
+
+    });
+	</script>
+</body>
+</html>
