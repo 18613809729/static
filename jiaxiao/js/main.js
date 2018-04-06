@@ -53,18 +53,28 @@ $.singlePost = function(triggerElem, url, data){
 };
 
 $.toSuccess = function(option){
+  var opt = {
+    "title":"操作成功",
+    "desc":"",
+    "primary_btn_msg":"确定",
+    "primary_btn_url":"javascript:history.back();"
+  }
+  $.extend(opt, option);
+  $(".msg_success").remove();
   var html = '<div class="page msg_success js_show" style="z-index:1000;">'+
                 '<div class="weui-msg">'+
                     '<div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>'+
                     '<div class="weui-msg__text-area">'+
-                        '<h2 class="weui-msg__title">操作成功</h2>'+
-                        '<p class="weui-msg__desc">内容详情，可根据实际需要安排，如果换行则不超过规定长度，居中展现<a href="javascript:void(0);">文字链接</a></p>'+
+                        '<h2 class="weui-msg__title">' + opt.title + '</h2>'+
+                        '<p class="weui-msg__desc">' + opt.desc + '</p>'+
                     '</div>'+
                     '<div class="weui-msg__opr-area">'+
                         '<p class="weui-btn-area">'+
-                            '<a href="javascript:history.back();" class="weui-btn weui-btn_primary">推荐操作</a>'+
-                            '<a href="javascript:history.back();" class="weui-btn weui-btn_default">辅助操作</a>'+
-                        '</p>'+
+                            '<a href="' + opt.primary_btn_url + '" class="weui-btn weui-btn_primary">' + opt.primary_btn_msg + '</a>';
+                            if(opt.default_btn_msg){
+                              html += '<a href="' + opt.default_btn_url + '" class="weui-btn weui-btn_default">' + opt.default_btn_msg + '</a>';
+                            }
+      html +=           '</p>'+
                     '</div>'+
                 '</div>'+
             '</div>';
