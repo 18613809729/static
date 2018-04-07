@@ -19,9 +19,6 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 .weui-cell__bd .weui-badge{
 	margin-left: 0.3rem;
 }
-.mr-left1_2{
-	margin-left: 1.2rem;
-}
 .cursor_pointer{
 	cursor: pointer;
 }
@@ -34,4 +31,19 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 
 .align_center{
 	text-align: center;
+}
+
+.globl_bg_color{
+	background-color: #f8f8f8 !important;
+}
+
+.mr-left1_2{
+	margin-left: 1.2rem;
+}
+.sub_content{
+	font-size: 15px;
+	color: #777;
+}
+.cell_swipe_btn{
+	line-height: 68px;
 }

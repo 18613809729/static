@@ -49,8 +49,16 @@ $.singlePost = function(triggerElem, url, data){
             triggerElem.removeClass("weui-btn_loading");
             triggerElem.find("i").removeClass("weui-loading");
         });
+    } else {
+      return {done:function(){}}
     }
 };
+
+$.singleDelete = function(triggerElem, url, data){
+  data = data || {};
+  data._method = "delete";
+  return $.singlePost(triggerElem, url, data);
+}
 
 $.toSuccess = function(option){
   var opt = {
