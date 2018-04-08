@@ -60,6 +60,12 @@ $.singleDelete = function(triggerElem, url, data){
   return $.singlePost(triggerElem, url, data);
 }
 
+$.singlePut = function(triggerElem, url, data){
+  data = data || {};
+  data._method = "put";
+  return $.singlePost(triggerElem, url, data);
+}
+
 $.toSuccess = function(option){
   var opt = {
     "title":"操作成功",
