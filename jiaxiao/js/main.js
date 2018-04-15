@@ -95,3 +95,24 @@ $.toSuccess = function(option){
   $("body").append(html);
 }
 
+$.groupByPinyin = function(datas, field){
+  var upper_lettel = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#";
+  var res={};
+  var pinyin = new Pinyin();
+  $.each(datas, function(idx, data){
+      var firstLettel = data[field] && pinyin.getFullChars(data[field]).toUpperCase().charAt(0);
+      if(firstLettel && upper_lettel.contains(firstLettel)){
+        res[firstLettel] = res[firstLettel] || [];
+        res[firstLettel].push(data);
+      } else {
+        res["#"] = res["#"] || [];
+        res["#"].push(data);
+      }
+  });
+  var resLst = [];
+  for (var i = 0; i < upper_lettel.length; i++) {
+    var resI = res[upper_lettel[i]];
+    resI && resLst.push({"lettel":upper_lettel[i], "data":resI});
+  }
+  return resLst;
+}

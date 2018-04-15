@@ -41,9 +41,20 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 	margin-left: 1.2rem;
 }
 .sub_content{
-	font-size: 15px;
+	font-size: 13px;
 	color: #777;
+	line-height: 2;
 }
 .cell_swipe_btn{
 	line-height: 68px;
+}
+.z_index100{
+	z-index: 100;
+}
+.fit_content{
+	height: fit-content;
+}
+
+.mt50{
+	margin-top: 50px;
 }
