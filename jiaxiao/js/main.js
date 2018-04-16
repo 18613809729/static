@@ -55,14 +55,22 @@ $.singlePost = function(triggerElem, url, data){
 };
 
 $.singleDelete = function(triggerElem, url, data){
-  data = data || {};
-  data._method = "delete";
+  if(data && typeof data == "string"){
+    data += "&_method=delete";
+  } else {
+    data = data || {};
+    data._method = "delete";
+  }
   return $.singlePost(triggerElem, url, data);
 }
 
 $.singlePut = function(triggerElem, url, data){
-  data = data || {};
-  data._method = "put";
+  if(data && typeof data == "string"){
+    data += "&_method=put";
+  } else {
+    data = data || {};
+    data._method = "put";
+  }
   return $.singlePost(triggerElem, url, data);
 }
 

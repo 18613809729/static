@@ -58,3 +58,7 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 .mt50{
 	margin-top: 50px;
 }
+
+.font_warn{
+	color: red;
+}
