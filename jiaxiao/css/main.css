@@ -59,6 +59,30 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 	margin-top: 50px;
 }
 
+.mt60{
+	margin-top: 60px;
+}
+
 .font_warn{
 	color: red;
+}
+
+ .select_label{
+    background-color: white;
+    padding: 0.3rem;
+    border: 1px solid #cccccc;
+    border-radius: 0.2rem;
+}
+
+.select_label_checked{
+    border: 1px solid #1aad19;;
+    color:  #1aad19;
+}
+
+.center{
+    text-align: center;
+}
+
+.inherit_bg{
+	background-color: inherit !important;
 }
