@@ -86,3 +86,7 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 .inherit_bg{
 	background-color: inherit !important;
 }
+
+.opacity0{
+	opacity: 0;
+}
