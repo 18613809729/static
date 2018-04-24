@@ -124,3 +124,5 @@ $.groupByPinyin = function(datas, field){
   }
   return resLst;
 }
+
+$.toast.prototype.defaults.duration=2000
