@@ -84,7 +84,9 @@ SearchBar.prototype = {
 		var id = item.data("id");
 		for (var i = 0; i < this.datas.length; i++) {
 			if(id == this.datas[i].id){
-				this.itemClickCallback.call(this, this.datas[i]);
+				if(this.itemClickCallback.call(this, this.datas[i]) === false){
+					return;
+				}
 				break;
 			}
 		}

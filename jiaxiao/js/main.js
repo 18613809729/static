@@ -126,3 +126,22 @@ $.groupByPinyin = function(datas, field){
 }
 
 $.toast.prototype.defaults.duration=2000
+
+function reloadIfNeed(UUID){
+  if(UUID){
+    var UUIDS_STR = localStorage.getItem('UUIDS');
+    var UUIDS = (UUIDS_STR && JSON.parse(UUIDS_STR)) || [];
+    for (var i = 0; i < UUIDS.length; i++) {
+      if(UUIDS[i] == UUID){
+      location.reload();
+      return;
+      }
+    }
+    UUIDS.unshift(UUID);
+    while(UUIDS.length > 20){
+      UUIDS.pop();
+    }
+    localStorage.setItem('UUIDS', JSON.stringify(UUIDS));
+  }
+}
+document.getElementById("UUID") && reloadIfNeed(document.getElementById("UUID").value);

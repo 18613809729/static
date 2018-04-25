@@ -90,3 +90,17 @@ body{font-family:-apple-system-font,Helvetica Neue,Helvetica,sans-serif}
 .opacity0{
 	opacity: 0;
 }
+
+.search_bar{
+	padding: 8px 10px;
+    box-sizing: border-box;
+    background-color: #efeff4;
+}
+
+.search_label{
+	border-radius: 3px;
+    text-align: center;
+    color: #9b9b9b;
+    background: #fff;
+    cursor: pointer;
+}
