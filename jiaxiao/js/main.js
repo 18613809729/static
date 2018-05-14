@@ -152,14 +152,14 @@ $.fn.extend({
       var layer = $(".share_layer");
       if(!layer.length){
         var html =  "<div class=\"share_layer\">" + 
-                    "     <div class=\"share_card1 an_share_card1\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card1.png\" alt=\"\"/></div>" + 
-                    "     <div class=\"share_card2 an_share_card2\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card2.png\" alt=\"\"/></div>" + 
-                    "     <div class=\"share_card3 an_share_card3\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card3.png\" alt=\"\"/></div>" + 
-                    "     <div class=\"share_card4 an_share_card4\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card4.png\" alt=\"\"/></div>" + 
-                    "     <div class=\"share_card5 an_share_card1\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card5.png\" alt=\"\"/></div>" + 
-                    "     <div class=\"share_card6 an_share_card2\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card6.png\" alt=\"\"/></div>" + 
-                    "     <div class=\"share_card7 an_share_card3\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card7.png\" alt=\"\"/></div>" + 
-                    "     <img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_bg.png\" alt=\"\"/>\r\n" + 
+                    "     <div class=\"share_card1 an_share_card1\"><img src=\"//static.xxwkj.club/common/image/share/share_card1.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card2 an_share_card2\"><img src=\"//static.xxwkj.club/common/image/share/share_card2.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card3 an_share_card3\"><img src=\"//static.xxwkj.club/common/image/share/share_card3.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card4 an_share_card4\"><img src=\"//static.xxwkj.club/common/image/share/share_card4.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card5 an_share_card1\"><img src=\"//static.xxwkj.club/common/image/share/share_card5.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card6 an_share_card2\"><img src=\"//static.xxwkj.club/common/image/share/share_card6.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card7 an_share_card3\"><img src=\"//static.xxwkj.club/common/image/share/share_card7.png\" alt=\"\"/></div>" + 
+                    "     <img src=\"//static.xxwkj.club/common/image/share/share_bg.png\" alt=\"\"/>\r\n" + 
                     " </div>"
         $("body").append(html);
       }
@@ -172,3 +172,45 @@ $.fn.extend({
 });
 
 $("#shareBtn").share();
+
+$.share=function(option){
+  option = $.extend({
+    title: '学车享优惠', 
+    desc:'好消息，即日起，学车享优惠',
+    link: 'https://jx.xxwkj.club/m/index', 
+    imgUrl: 'https://static.xxwkj.club/jiaxiao/image'
+  }, option);
+  wx.onMenuShareTimeline({
+    title: option.title, 
+    desc: option.desc, 
+    link: option.link,
+    imgUrl: option.imgUrl
+  });
+
+  wx.onMenuShareAppMessage({
+    title: option.title, 
+    desc: option.desc, 
+    link: option.link,
+    imgUrl: option.imgUrl
+  });
+  wx.onMenuShareQQ({
+    title: option.title, 
+    desc: option.desc, 
+    link: option.link,
+    imgUrl: option.imgUrl
+  });
+  wx.onMenuShareWeibo({
+    title: option.title, 
+    desc: option.desc, 
+    link: option.link,
+    imgUrl: option.imgUrl
+  });
+  wx.onMenuShareQZone({
+    title: option.title, 
+    desc: option.desc, 
+    link: option.link,
+    imgUrl: option.imgUrl
+  });
+}
+
+$.share({});
