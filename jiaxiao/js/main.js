@@ -173,44 +173,21 @@ $.fn.extend({
 
 $("#shareBtn").share();
 
-$.share=function(option){
-  option = $.extend({
-    title: '学车享优惠', 
-    desc:'好消息，即日起，学车享优惠',
+$.share=function(opt){
+  var option = {
+    title: '紫金县龙腾驾校林教练团队', 
+    desc:'学车钜惠 还有佣金',
     link: 'https://jx.xxwkj.club/m/index', 
-    imgUrl: 'https://static.xxwkj.club/jiaxiao/image'
-  }, option);
-  wx.onMenuShareTimeline({
-    title: option.title, 
-    desc: option.desc, 
-    link: option.link,
-    imgUrl: option.imgUrl
-  });
-
-  wx.onMenuShareAppMessage({
-    title: option.title, 
-    desc: option.desc, 
-    link: option.link,
-    imgUrl: option.imgUrl
-  });
-  wx.onMenuShareQQ({
-    title: option.title, 
-    desc: option.desc, 
-    link: option.link,
-    imgUrl: option.imgUrl
-  });
-  wx.onMenuShareWeibo({
-    title: option.title, 
-    desc: option.desc, 
-    link: option.link,
-    imgUrl: option.imgUrl
-  });
-  wx.onMenuShareQZone({
-    title: option.title, 
-    desc: option.desc, 
-    link: option.link,
-    imgUrl: option.imgUrl
-  });
+    imgUrl: 'https://static.xxwkj.club/jiaxiao/image/share.jpg'
+  };
+  $.extend(option, opt);
+  wx.onMenuShareTimeline(option);
+  wx.onMenuShareAppMessage(option);
+  wx.onMenuShareQQ(option);
+  wx.onMenuShareWeibo(option);
+  wx.onMenuShareQZone(option);
 }
 
-$.share({});
+wx.ready(function(){
+  $.share({});
+});
