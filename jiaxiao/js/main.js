@@ -145,3 +145,30 @@ function reloadIfNeed(UUID){
   }
 }
 document.getElementById("UUID") && reloadIfNeed(document.getElementById("UUID").value);
+
+$.fn.extend({
+  share:function(option){
+    $(this).click(function(){
+      var layer = $(".share_layer");
+      if(!layer.length){
+        var html =  "<div class=\"share_layer\">" + 
+                    "     <div class=\"share_card1 an_share_card1\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card1.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card2 an_share_card2\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card2.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card3 an_share_card3\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card3.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card4 an_share_card4\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card4.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card5 an_share_card1\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card5.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card6 an_share_card2\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card6.png\" alt=\"\"/></div>" + 
+                    "     <div class=\"share_card7 an_share_card3\"><img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_card7.png\" alt=\"\"/></div>" + 
+                    "     <img src=\"//m.jr.jd.com/udc-active/2016/BaiCardTarot/css/img/share_bg.png\" alt=\"\"/>\r\n" + 
+                    " </div>"
+        $("body").append(html);
+      }
+      $(".share_layer").show();
+    });
+    $("body").on("click", ".share_layer", function(){
+        $(".share_layer").hide();
+    });
+  }
+});
+
+$("#shareBtn").share();
