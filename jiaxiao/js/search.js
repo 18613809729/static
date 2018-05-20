@@ -10,7 +10,7 @@ $.fn.extend({
 				if(/\d+/.test(searchText)){
 					return ["mobile"];
 				}else{
-					return [{"fieldName":"username", "type":"pinyin"}];
+					return ["username", {"fieldName":"username", "type":"pinyin"}];
 				}
 			},
 			render:function(resArr){
