@@ -101,6 +101,8 @@ $.toSuccess = function(option){
                 '</div>'+
             '</div>';
   $("body").append(html);
+  document.documentElement.scrollTop=0;
+  document.body.scrollTop=0;
 }
 
 $.groupByPinyin = function(datas, field){
